@@ -1,82 +1,75 @@
 import Head from 'next/head'
-
-export default function Home() {
+import Header from '../components/Header'
+import Banner from '../components/Banner'
+import SmallCard from '../components/SmallCard'
+import MediumCard from '../components/MediumCard'
+import LargeCard from '../components/LargeCard'
+import Footer from '../components/Footer'
+const Home = ({ exploreData, cardsData }) => {
+  console.log(exploreData)
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center py-2">
+    <div>
       <Head>
-        <title>Create Next App</title>
+        <title>Airbnb</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main className="flex w-full flex-1 flex-col items-center justify-center px-20 text-center">
-        <h1 className="text-6xl font-bold">
-          Welcome to{' '}
-          <a className="text-blue-600" href="https://nextjs.org">
-            Next.js!
-          </a>
-        </h1>
+      {/* Header */}
+      <Header />
+      {/* banner */}
+      <Banner />
+      <main className="mx-auto max-w-5xl px-8 sm:px-16">
+        <section className="pt-8">
+          <h2 className="pb-5 text-3xl font-bold">Explore Nearby</h2>
 
-        <p className="mt-3 text-2xl">
-          Get started by editing{' '}
-          <code className="rounded-md bg-gray-100 p-3 font-mono text-lg">
-            pages/index.tsx
-          </code>
-        </p>
-
-        <div className="mt-6 flex max-w-4xl flex-wrap items-center justify-around sm:w-full">
-          <a
-            href="https://nextjs.org/docs"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Documentation &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Find in-depth information about Next.js features and API.
-            </p>
-          </a>
-
-          <a
-            href="https://nextjs.org/learn"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Learn &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Learn about Next.js in an interactive course with quizzes!
-            </p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/canary/examples"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Examples &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Discover and deploy boilerplate example Next.js projects.
-            </p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="mt-6 w-96 rounded-xl border p-6 text-left hover:text-blue-600 focus:text-blue-600"
-          >
-            <h3 className="text-2xl font-bold">Deploy &rarr;</h3>
-            <p className="mt-4 text-xl">
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
+          {/* pull data from the server using nextjs - Server Side Rendering - */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 lg:gap-2 xl:grid-cols-4">
+            {exploreData?.map((item) => (
+              <SmallCard key={item.location} {...item} />
+            ))}
+          </div>
+        </section>
+        <section>
+          <h2 className="py-8 text-3xl font-bold">Live Anywhere</h2>
+          <div className="-ml-3 flex gap-3 overflow-scroll p-3 scrollbar-hide">
+            {cardsData?.map((item) => (
+              <MediumCard key={item.img} {...item} />
+            ))}
+          </div>
+        </section>
+        <section>
+          <LargeCard
+            img="https://links.papareact.com/4cj"
+            title="The Grateast Outdoors"
+            buttonText="Get Inspired"
+            description="Wishlists curated by Airbnb"
+          />
+        </section>
       </main>
-
-      <footer className="flex h-24 w-full items-center justify-center border-t">
-        <a
-          className="flex items-center justify-center"
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="ml-2 h-4" />
-        </a>
-      </footer>
+      <Footer />
     </div>
   )
+}
+export default Home
+{
+  /* pull data from the server using nextjs - Server Side Rendering - in this case the data doesnot change so we use the 'static rendering'. for static the server generate the page once and when the user comes, it delivers the same copy */
+}
+
+// function
+
+export async function getStaticProps() {
+  const res = await fetch('https://links.papareact.com/pyp')
+  const exploreData = await res.json()
+
+  // card data
+  const cardsData = await fetch('https://links.papareact.com/zp1').then((res) =>
+    res.json()
+  )
+  return {
+    // we pass the props to the functional component.
+    props: {
+      exploreData,
+      cardsData,
+    },
+  }
 }
