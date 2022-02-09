@@ -12,8 +12,10 @@ const LargeCard = ({ img, title, description, buttonText }) => {
           objectFit="cover"
         />
       </div>
-      <div className="absolute top-16 left-12">
-        <h3 className="mb-3 w-64 text-4xl font-semibold">{title}</h3>
+      <div className="absolute top-10 left-10 sm:left-12 sm:top-16">
+        <h3 className="mb-3 w-40 text-2xl font-semibold sm:w-64 sm:text-4xl">
+          {title}
+        </h3>
         <p className="font-medium text-gray-600">{description}</p>
         <button className="mt-5 rounded-lg bg-gray-900 px-4 py-2 text-sm font-medium text-white">
           {buttonText}
