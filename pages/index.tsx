@@ -6,7 +6,6 @@ import MediumCard from '../components/MediumCard'
 import LargeCard from '../components/LargeCard'
 import Footer from '../components/Footer'
 const Home = ({ exploreData, cardsData }) => {
-  console.log(exploreData)
   return (
     <div>
       <Head>
