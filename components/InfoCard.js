@@ -5,7 +5,7 @@ import { StarIcon } from '@heroicons/react/solid'
 const InfoCard = ({
   img,
   title,
-  location,
+
   description,
   star,
   price,

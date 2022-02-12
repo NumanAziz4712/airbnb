@@ -14,7 +14,7 @@ const Home = ({ exploreData, cardsData }) => {
       </Head>
 
       {/* Header */}
-      <Header />
+      <Header placeholder={''} />
       {/* banner */}
       <Banner />
       <main className="mx-auto max-w-5xl px-8 sm:px-16">

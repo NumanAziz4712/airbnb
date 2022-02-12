@@ -34,7 +34,7 @@ const Search = ({ searchResults }) => {
             <p className="button">Rooms and Beds</p>
             <p className="button">More filters</p>
           </div>
-          <div className="my-12 grid grid-cols-1 gap-6  xl:grid-cols-2">
+          <div className="my-12 grid grid-cols-1 gap-6 lg:gap-5 xl:grid-cols-2">
             {searchResults.map((item) => (
               <InfoCard key={item.title} {...item} location={location} />
             ))}

@@ -27,7 +27,6 @@ const Header = ({ placeholder }) => {
   // handle selece
   // the ranges and all the stuff comming from the library
   const handleSelect = (ranges) => {
-    console.log(ranges)
     setStartDate(ranges.Selection.startDate)
     setEndDate(ranges.Selection.endDate)
   }
